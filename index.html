@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>BF Examples — Brainfuck Algorithms</title>
 
 <style>
@@ -46,6 +45,16 @@
 
     code {
         font-family: "Courier New", monospace;
+    }
+
+    .operation {
+        display: inline-block;
+        background: #f8f9fa;
+        border: 1px solid #c8ccd1;
+        padding: 6px 10px;
+        margin: 5px 0 10px;
+        font-family: "Courier New", monospace;
+        font-size: 15px;
     }
 
     .bf {
@@ -137,7 +146,6 @@
 </head>
 
 <body>
-
 <div class="page">
 
 <h1>Brainfuck algorithms</h1>
@@ -151,7 +159,7 @@ repository.
 </p>
 
 <p>
-The examples cover arithmetic, comparisons, memory manipulation,
+The examples cover arithmetic, comparisons, logic gates, memory manipulation,
 conversions, string manipulation, and other useful operations
 written in Brainfuck.
 </p>
@@ -177,26 +185,31 @@ written in Brainfuck.
     <a href="#gt">2.1 Greater than</a>
     <a href="#gte">2.2 Greater than or equal</a>
 
-    <a href="#memory">3. Memory manipulation</a>
-    <a href="#duplic">3.1 Duplicate</a>
-    <a href="#swap">3.2 Swap</a>
+    <a href="#logic">3. Logic gates</a>
+    <a href="#not">3.1 NOT</a>
 
-    <a href="#conversions">4. Conversions</a>
-    <a href="#asciinum">4.1 ASCII to Number</a>
-    <a href="#numascii">4.2 Number to ASCII</a>
+    <a href="#memory">4. Memory manipulation</a>
+    <a href="#duplic">4.1 Duplicate</a>
+    <a href="#swap">4.2 Swap</a>
 
-    <a href="#other">5. Other algorithms</a>
-    <a href="#clr">5.1 Clear</a>
-    <a href="#neg">5.2 Negation</a>
-    <a href="#pos">5.3 Positive</a>
-    <a href="#nl">5.4 Newline</a>
+    <a href="#conversions">5. Conversions</a>
+    <a href="#asciinum">5.1 ASCII to Number</a>
+    <a href="#numascii">5.2 Number to ASCII</a>
 
-    <a href="#strings">6. String manipulation</a>
-    <a href="#rev">6.1 Reverse</a>
-    <a href="#strlen">6.2 Length</a>
-    <a href="#concat">6.3 Concatenate</a>
+    <a href="#other">6. Other algorithms</a>
+    <a href="#clr">6.1 Clear</a>
+    <a href="#neg">6.2 Negation</a>
+    <a href="#pos">6.3 Positive</a>
+    <a href="#nl">6.4 Newline</a>
+    <a href="#copy">6.5 Copy</a>
+    <a href="#print0to9">6.6 Print 0 to 9</a>
+
+    <a href="#strings">7. String manipulation</a>
+    <a href="#rev">7.1 Reverse</a>
+    <a href="#strlen">7.2 Length</a>
+    <a href="#concat">7.3 Concatenate</a>
+    <a href="#strcpy">7.4 Copy</a>
 </div>
-
 
 <!-- ============================= -->
 <!-- ARITHMETIC -->
@@ -206,9 +219,7 @@ written in Brainfuck.
 
 <h3 id="add">1.1 Addition</h3>
 
-<p>
-Adds two values together.
-</p>
+<p class="operation"><code>x = x + y</code></p>
 
 <p>
 File:
@@ -219,12 +230,9 @@ File:
 
 <pre class="bf">[->+&lt;]&gt;[&lt;+&gt;-]</pre>
 
-
 <h3 id="sub">1.2 Subtraction</h3>
 
-<p>
-Subtracts one cell from another.
-</p>
+<p class="operation"><code>x = x - y</code></p>
 
 <p>
 File:
@@ -235,12 +243,9 @@ File:
 
 <pre class="bf">[&gt;-&lt;-]&gt;</pre>
 
-
 <h3 id="mul">1.3 Multiplication</h3>
 
-<p>
-Multiplies two values.
-</p>
+<p class="operation"><code>x = x * y</code></p>
 
 <p>
 File:
@@ -251,12 +256,9 @@ File:
 
 <pre class="bf">[&gt;[&gt;+&gt;+&lt;&lt;-]&gt;[&lt;+&gt;-]&lt;-]</pre>
 
-
 <h3 id="div">1.4 Division</h3>
 
-<p>
-Computes integer division using Brainfuck cells.
-</p>
+<p class="operation"><code>x = x / y</code></p>
 
 <p>
 File:
@@ -267,12 +269,9 @@ File:
 
 <pre class="bf">[->-[&gt;+&gt;&gt;]&gt;[+[-&lt;+&gt;]&gt;+&gt;&gt;]&lt;&lt;&lt;&lt;&lt;]</pre>
 
-
 <h3 id="mod">1.5 Modulo</h3>
 
-<p>
-Computes the remainder of an integer division.
-</p>
+<p class="operation"><code>x = x % y</code></p>
 
 <p>
 File:
@@ -283,7 +282,6 @@ File:
 
 <pre class="bf">[&gt;-&gt;+&lt;&lt;]&gt;[&lt;+&gt;-]&lt;</pre>
 
-
 <!-- ============================= -->
 <!-- COMPARISON -->
 <!-- ============================= -->
@@ -292,10 +290,7 @@ File:
 
 <h3 id="gt">2.1 Greater than</h3>
 
-<p>
-Tests whether one value is greater than another.
-The result is represented as a boolean value.
-</p>
+<p class="operation"><code>x = x &gt; y</code></p>
 
 <p>
 File:
@@ -306,12 +301,9 @@ File:
 
 <pre class="bf">[&gt;-&lt;-]&gt;[&lt;+&gt;-]</pre>
 
-
 <h3 id="gte">2.2 Greater than or equal</h3>
 
-<p>
-Tests whether one value is greater than or equal to another.
-</p>
+<p class="operation"><code>x = x &gt;= y</code></p>
 
 <p>
 File:
@@ -322,18 +314,61 @@ File:
 
 <pre class="bf">[&gt;-&lt;-]&gt;[&lt;+&gt;-]&gt;[-&lt;+&gt;]</pre>
 
+<!-- ============================= -->
+<!-- LOGIC GATES -->
+<!-- ============================= -->
+
+<h2 id="logic">3. Logic gates</h2>
+
+<p>
+Logic gates operate on boolean values. In these examples,
+<code>0</code> represents false and <code>1</code> represents true.
+</p>
+
+<h3 id="not">3.1 NOT</h3>
+
+<p class="operation"><code>x = !x</code></p>
+
+<div class="note">
+    <strong>Boolean behavior:</strong>
+    <code>0 → 1</code> and <code>1 → 0</code>.
+</div>
+
+<p>
+File:
+<a href="https://github.com/programming12321/BF-examples/blob/main/not.bf">
+<span class="file">not.bf</span>
+</a>
+</p>
+
+<pre class="bf">&gt;+&lt;[-&gt;-&lt;]&gt;[-&lt;+&gt;]&lt;</pre>
+
+<p>Example:</p>
+
+<table>
+<tr>
+    <th>Input</th>
+    <th>Output</th>
+</tr>
+<tr>
+    <td>0</td>
+    <td>1</td>
+</tr>
+<tr>
+    <td>1</td>
+    <td>0</td>
+</tr>
+</table>
 
 <!-- ============================= -->
 <!-- MEMORY -->
 <!-- ============================= -->
 
-<h2 id="memory">3. Memory manipulation</h2>
+<h2 id="memory">4. Memory manipulation</h2>
 
-<h3 id="duplic">3.1 Duplicate</h3>
+<h3 id="duplic">4.1 Duplicate</h3>
 
-<p>
-Duplicates a value into another cell while preserving the original.
-</p>
+<p class="operation"><code>y = x</code></p>
 
 <p>
 File:
@@ -344,12 +379,9 @@ File:
 
 <pre class="bf">[&gt;+&gt;+&lt;&lt;-]&gt;&gt;[&lt;&lt;+&gt;&gt;-]&lt;</pre>
 
+<h3 id="swap">4.2 Swap</h3>
 
-<h3 id="swap">3.2 Swap</h3>
-
-<p>
-Swaps the values of two cells.
-</p>
+<p class="operation"><code>x, y = y, x</code></p>
 
 <p>
 File:
@@ -360,18 +392,15 @@ File:
 
 <pre class="bf">[&gt;+&lt;-]&gt;[&lt;+&gt;-]</pre>
 
-
 <!-- ============================= -->
 <!-- CONVERSIONS -->
 <!-- ============================= -->
 
-<h2 id="conversions">4. Conversions</h2>
+<h2 id="conversions">5. Conversions</h2>
 
-<h3 id="asciinum">4.1 ASCII to Number</h3>
+<h3 id="asciinum">5.1 ASCII to Number</h3>
 
-<p>
-Converts an ASCII digit to its numeric value.
-</p>
+<p class="operation"><code>x = ord(str)</code></p>
 
 <p>
 File:
@@ -382,12 +411,9 @@ File:
 
 <pre class="bf">------------------------------------------------</pre>
 
+<h3 id="numascii">5.2 Number to ASCII</h3>
 
-<h3 id="numascii">4.2 Number to ASCII</h3>
-
-<p>
-Converts a numeric value to its ASCII character representation.
-</p>
+<p class="operation"><code>str = chr(x)</code></p>
 
 <p>
 File:
@@ -398,18 +424,15 @@ File:
 
 <pre class="bf">++++++++++++++++++++++++++++++++++++++++++++++++</pre>
 
-
 <!-- ============================= -->
 <!-- OTHER -->
 <!-- ============================= -->
 
-<h2 id="other">5. Other algorithms</h2>
+<h2 id="other">6. Other algorithms</h2>
 
-<h3 id="clr">5.1 Clear</h3>
+<h3 id="clr">6.1 Clear</h3>
 
-<p>
-Sets the current cell to zero.
-</p>
+<p class="operation"><code>x = 0</code></p>
 
 <p>
 File:
@@ -420,12 +443,9 @@ File:
 
 <pre class="bf">[-]</pre>
 
+<h3 id="neg">6.2 Negation</h3>
 
-<h3 id="neg">5.2 Negation</h3>
-
-<p>
-Performs a negation operation on a value.
-</p>
+<p class="operation"><code>x = -x</code></p>
 
 <p>
 File:
@@ -436,12 +456,9 @@ File:
 
 <pre class="bf">[-]+[&gt;-&lt;]</pre>
 
+<h3 id="pos">6.3 Positive</h3>
 
-<h3 id="pos">5.3 Positive</h3>
-
-<p>
-Converts a value into its positive representation.
-</p>
+<p class="operation"><code>x = abs(x)</code></p>
 
 <p>
 File:
@@ -452,12 +469,9 @@ File:
 
 <pre class="bf">[&gt;+&lt;-]</pre>
 
+<h3 id="nl">6.4 Newline</h3>
 
-<h3 id="nl">5.4 Newline</h3>
-
-<p>
-Outputs a newline character.
-</p>
+<p class="operation"><code>print("\n")</code></p>
 
 <p>
 File:
@@ -468,18 +482,41 @@ File:
 
 <pre class="bf">++++++++++[&gt;+++++++&gt;++++++++++&gt;+++&lt;&lt;&lt;-]&gt;&gt;+.&gt;+++++++..</pre>
 
+<h3 id="copy">6.5 Copy</h3>
+
+<p class="operation"><code>y = x</code></p>
+
+<p>
+File:
+<a href="https://github.com/programming12321/BF-examples/blob/main/cpy.bf">
+<span class="file">cpy.bf</span>
+</a>
+</p>
+
+<pre class="bf">[&gt;+&gt;+&lt;&lt;]&gt;&gt;[-&lt;&lt;+&gt;&gt;-]&lt;&lt;</pre>
+
+<h3 id="print0to9">6.6 Print 0 to 9</h3>
+
+<p class="operation"><code>print("0123456789")</code></p>
+
+<p>
+File:
+<a href="https://github.com/programming12321/BF-examples/blob/main/print0to9.bf">
+<span class="file">print0to9.bf</span>
+</a>
+</p>
+
+<pre class="bf">++++[&gt;++++++++++&lt;-]++++++++++&gt;+++++++&lt;[&gt;+.&lt;-]</pre>
 
 <!-- ============================= -->
 <!-- STRINGS -->
 <!-- ============================= -->
 
-<h2 id="strings">6. String manipulation</h2>
+<h2 id="strings">7. String manipulation</h2>
 
-<h3 id="rev">6.1 Reverse</h3>
+<h3 id="rev">7.1 Reverse</h3>
 
-<p>
-Reverses a string.
-</p>
+<p class="operation"><code>str = reverse(str)</code></p>
 
 <p>
 File:
@@ -490,12 +527,9 @@ File:
 
 <pre class="bf">,[[----------[++++++++++&gt;&gt;,&lt;]&gt;]&lt;&lt;&lt;[.&lt;&lt;]++++++++++.[-]&gt;&gt;,]</pre>
 
+<h3 id="strlen">7.2 Length</h3>
 
-<h3 id="strlen">6.2 Length</h3>
-
-<p>
-Computes the length of a string.
-</p>
+<p class="operation"><code>x = len(str)</code></p>
 
 <p>
 File:
@@ -506,11 +540,9 @@ File:
 
 <pre class="bf">[-],[&gt;+&lt;[-],]</pre>
 
-<h3 id="concat">6.3 Concatenate</h3>
+<h3 id="concat">7.3 Concatenate</h3>
 
-<p>
-Concatenates two strings.
-</p>
+<p class="operation"><code>x = x + y</code></p>
 
 <p>
 File:
@@ -519,7 +551,20 @@ File:
 </a>
 </p>
 
-<pre class="bf">,----------[>>[-]<<[->+>+<<]>[[-]>++++++++++.<]<+,----------],----------[>>[-]<<[->+>+<<]>[[-]>++++++++++.<]<+,----------]</pre>
+<pre class="bf">,----------[&gt;&gt;[-]&lt;&lt;[->+&gt;+&lt;&lt;]&gt;[[-]&gt;++++++++++.&lt;]&lt;+,----------],----------[&gt;&gt;[-]&lt;&lt;[->+&gt;+&lt;&lt;]&gt;[[-]&gt;++++++++++.&lt;]&lt;+,----------]</pre>
+
+<h3 id="strcpy">7.4 Copy</h3>
+
+<p class="operation"><code>x = str</code></p>
+
+<p>
+File:
+<a href="https://github.com/programming12321/BF-examples/blob/main/strcpy.bf">
+<span class="file">strcpy.bf</span>
+</a>
+</p>
+
+<pre class="bf">,[->+&gt;+&lt;&lt;]&gt;&gt;[-&lt;&lt;+&gt;&gt;]&lt;&lt;</pre>
 
 <!-- ============================= -->
 <!-- REPOSITORY FILES -->
@@ -528,6 +573,7 @@ File:
 <h2>Repository files</h2>
 
 <table>
+
 <tr>
     <th>Algorithm</th>
     <th>File</th>
@@ -535,168 +581,115 @@ File:
 
 <tr>
     <td>Addition</td>
-    <td>
-        <a href="https://github.com/programming12321/BF-examples/blob/main/add.bf">
-            add.bf
-        </a>
-    </td>
+    <td><a href="https://github.com/programming12321/BF-examples/blob/main/add.bf">add.bf</a></td>
 </tr>
 
 <tr>
     <td>Subtraction</td>
-    <td>
-        <a href="https://github.com/programming12321/BF-examples/blob/main/sub.bf">
-            sub.bf
-        </a>
-    </td>
+    <td><a href="https://github.com/programming12321/BF-examples/blob/main/sub.bf">sub.bf</a></td>
 </tr>
 
 <tr>
     <td>Multiplication</td>
-    <td>
-        <a href="https://github.com/programming12321/BF-examples/blob/main/mul.bf">
-            mul.bf
-        </a>
-    </td>
+    <td><a href="https://github.com/programming12321/BF-examples/blob/main/mul.bf">mul.bf</a></td>
 </tr>
 
 <tr>
     <td>Division</td>
-    <td>
-        <a href="https://github.com/programming12321/BF-examples/blob/main/div.bf">
-            div.bf
-        </a>
-    </td>
+    <td><a href="https://github.com/programming12321/BF-examples/blob/main/div.bf">div.bf</a></td>
 </tr>
 
 <tr>
     <td>Modulo</td>
-    <td>
-        <a href="https://github.com/programming12321/BF-examples/blob/main/mod.bf">
-            mod.bf
-        </a>
-    </td>
+    <td><a href="https://github.com/programming12321/BF-examples/blob/main/mod.bf">mod.bf</a></td>
 </tr>
 
 <tr>
     <td>Greater than</td>
-    <td>
-        <a href="https://github.com/programming12321/BF-examples/blob/main/gt.bf">
-            gt.bf
-        </a>
-    </td>
+    <td><a href="https://github.com/programming12321/BF-examples/blob/main/gt.bf">gt.bf</a></td>
 </tr>
 
 <tr>
     <td>Greater than or equal</td>
-    <td>
-        <a href="https://github.com/programming12321/BF-examples/blob/main/gte.bf">
-            gte.bf
-        </a>
-    </td>
+    <td><a href="https://github.com/programming12321/BF-examples/blob/main/gte.bf">gte.bf</a></td>
+</tr>
+
+<tr>
+    <td>NOT</td>
+    <td><a href="https://github.com/programming12321/BF-examples/blob/main/not.bf">not.bf</a></td>
 </tr>
 
 <tr>
     <td>Duplicate</td>
-    <td>
-        <a href="https://github.com/programming12321/BF-examples/blob/main/duplic.bf">
-            duplic.bf
-        </a>
-    </td>
+    <td><a href="https://github.com/programming12321/BF-examples/blob/main/duplic.bf">duplic.bf</a></td>
 </tr>
 
 <tr>
     <td>Swap</td>
-    <td>
-        <a href="https://github.com/programming12321/BF-examples/blob/main/swap.bf">
-            swap.bf
-        </a>
-    </td>
+    <td><a href="https://github.com/programming12321/BF-examples/blob/main/swap.bf">swap.bf</a></td>
 </tr>
 
 <tr>
     <td>ASCII to Number</td>
-    <td>
-        <a href="https://github.com/programming12321/BF-examples/blob/main/asciinum.bf">
-            asciinum.bf
-        </a>
-    </td>
+    <td><a href="https://github.com/programming12321/BF-examples/blob/main/asciinum.bf">asciinum.bf</a></td>
 </tr>
 
 <tr>
     <td>Number to ASCII</td>
-    <td>
-        <a href="https://github.com/programming12321/BF-examples/blob/main/numascii.bf">
-            numascii.bf
-        </a>
-    </td>
+    <td><a href="https://github.com/programming12321/BF-examples/blob/main/numascii.bf">numascii.bf</a></td>
 </tr>
 
 <tr>
     <td>Clear</td>
-    <td>
-        <a href="https://github.com/programming12321/BF-examples/blob/main/clr.bf">
-            clr.bf
-        </a>
-    </td>
+    <td><a href="https://github.com/programming12321/BF-examples/blob/main/clr.bf">clr.bf</a></td>
 </tr>
 
 <tr>
     <td>Negation</td>
-    <td>
-        <a href="https://github.com/programming12321/BF-examples/blob/main/neg.bf">
-            neg.bf
-        </a>
-    </td>
+    <td><a href="https://github.com/programming12321/BF-examples/blob/main/neg.bf">neg.bf</a></td>
 </tr>
 
 <tr>
     <td>Positive</td>
-    <td>
-        <a href="https://github.com/programming12321/BF-examples/blob/main/pos.bf">
-            pos.bf
-        </a>
-    </td>
+    <td><a href="https://github.com/programming12321/BF-examples/blob/main/pos.bf">pos.bf</a></td>
 </tr>
 
 <tr>
     <td>Newline</td>
-    <td>
-        <a href="https://github.com/programming12321/BF-examples/blob/main/nl.bf">
-            nl.bf
-        </a>
-    </td>
+    <td><a href="https://github.com/programming12321/BF-examples/blob/main/nl.bf">nl.bf</a></td>
+</tr>
+
+<tr>
+    <td>Copy</td>
+    <td><a href="https://github.com/programming12321/BF-examples/blob/main/cpy.bf">cpy.bf</a></td>
+</tr>
+
+<tr>
+    <td>Print 0 to 9</td>
+    <td><a href="https://github.com/programming12321/BF-examples/blob/main/print0to9.bf">print0to9.bf</a></td>
 </tr>
 
 <tr>
     <td>String Reverse</td>
-    <td>
-        <a href="https://github.com/programming12321/BF-examples/blob/main/strrev.bf">
-            strrev.bf
-        </a>
-    </td>
+    <td><a href="https://github.com/programming12321/BF-examples/blob/main/strrev.bf">strrev.bf</a></td>
 </tr>
 
 <tr>
     <td>String Length</td>
-    <td>
-        <a href="https://github.com/programming12321/BF-examples/blob/main/strlen.bf">
-            strlen.bf
-        </a>
-    </td>
+    <td><a href="https://github.com/programming12321/BF-examples/blob/main/strlen.bf">strlen.bf</a></td>
 </tr>
 
 <tr>
     <td>String Concatenate</td>
-    <td>
-        <a href="https://github.com/programming12321/BF-examples/blob/main/strcat.bf">
-            strcat.bf
-        </a>
-    </td>
+    <td><a href="https://github.com/programming12321/BF-examples/blob/main/strcat.bf">strcat.bf</a></td>
+</tr>
+
+<tr>
+    <td>String Copy</td>
+    <td><a href="https://github.com/programming12321/BF-examples/blob/main/strcpy.bf">strcpy.bf</a></td>
 </tr>
 
 </table>
-
 
 <div class="footer">
     BF Examples — Brainfuck algorithms<br>
@@ -704,6 +697,5 @@ File:
 </div>
 
 </div>
-
 </body>
 </html>
