@@ -29,46 +29,52 @@ written in Brainfuck.
 <div class="toc">
     <div class="toc-title">Contents</div>
 
-    <a href="#arithmetic">1. Arithmetic</a>
-    <a href="#add">1.1 Addition</a>
-    <a href="#sub">1.2 Subtraction</a>
-    <a href="#mul">1.3 Multiplication</a>
-    <a href="#div">1.4 Division</a>
-    <a href="#mod">1.5 Modulo</a>
-    <a href="#pow">1.6 Exponentiation</a>
+```
+<a href="#arithmetic">1. Arithmetic</a>
+<a href="#add">1.1 Addition</a>
+<a href="#sub">1.2 Subtraction</a>
+<a href="#mul">1.3 Multiplication</a>
+<a href="#div">1.4 Division</a>
+<a href="#mod">1.5 Modulo</a>
+<a href="#pow">1.6 Exponentiation</a>
+<a href="#unitstens">1.7 Divide into tens and units</a>
 
-    <a href="#comparison">2. Comparisons</a>
-    <a href="#gt">2.1 Greater than</a>
-    <a href="#gte">2.2 Greater than or equal</a>
+<a href="#comparison">2. Comparisons</a>
+<a href="#gt">2.1 Greater than</a>
+<a href="#gte">2.2 Greater than or equal</a>
 
-    <a href="#logic">3. Logic gates</a>
-    <a href="#not">3.1 NOT</a>
+<a href="#logic">3. Logic gates</a>
+<a href="#not">3.1 NOT</a>
 
-    <a href="#memory">4. Memory manipulation</a>
-    <a href="#duplic">4.1 Duplicate</a>
-    <a href="#swap">4.2 Swap</a>
+<a href="#memory">4. Memory manipulation</a>
+<a href="#duplic">4.1 Duplicate</a>
+<a href="#swap">4.2 Swap</a>
 
-    <a href="#conversions">5. Conversions</a>
-    <a href="#asciinum">5.1 ASCII to Number</a>
-    <a href="#numascii">5.2 Number to ASCII</a>
+<a href="#conversions">5. Conversions</a>
+<a href="#asciinum">5.1 ASCII to Number</a>
+<a href="#numascii">5.2 Number to ASCII</a>
 
-    <a href="#other">6. Other algorithms</a>
-    <a href="#clr">6.1 Clear</a>
-    <a href="#neg">6.2 Negation</a>
-    <a href="#pos">6.3 Positive</a>
-    <a href="#nl">6.4 Newline</a>
-    <a href="#copy">6.5 Copy</a>
-    <a href="#print0to9">6.6 Print 0 to 9</a>
+<a href="#other">6. Other algorithms</a>
+<a href="#clr">6.1 Clear</a>
+<a href="#neg">6.2 Negation</a>
+<a href="#pos">6.3 Positive</a>
+<a href="#nl">6.4 Newline</a>
+<a href="#copy">6.5 Copy</a>
+<a href="#print0to9">6.6 Print 0 to 9</a>
 
-    <a href="#strings">7. String manipulation</a>
-    <a href="#rev">7.1 Reverse</a>
-    <a href="#strlen">7.2 Length</a>
-    <a href="#concat">7.3 Concatenate</a>
-    <a href="#strcpy">7.4 Copy</a>
+<a href="#strings">7. String manipulation</a>
+<a href="#rev">7.1 Reverse</a>
+<a href="#strlen">7.2 Length</a>
+<a href="#concat">7.3 Concatenate</a>
+<a href="#strcpy">7.4 Copy</a>
+```
+
 </div>
 
 <!-- ============================= -->
+
 <!-- ARITHMETIC -->
+
 <!-- ============================= -->
 
 <h2 id="arithmetic">1. Arithmetic</h2>
@@ -110,7 +116,7 @@ File:
 </a>
 </p>
 
-<pre class="bf">[&gt;[&gt;+&gt;+&lt;&lt;-]&gt;[&lt;+&gt;-]&lt;-]</pre>
+<pre class="bf">[&gt;[&gt;+&gt;+&lt;&lt;-]&gt;&gt;[&lt;&lt;+&gt;&gt;-]&lt;&lt;&lt;-]</pre>
 
 <h3 id="div">1.4 Division</h3>
 
@@ -149,10 +155,61 @@ File:
 </a>
 </p>
 
-<pre class="bf">[-]<<[>>+<<-]+>[>>[-]>[-]<<<<[>>>>+<<<<-]>>>>[<<[<<+>>>+<-]>[<+>-]>-]<<<-]</pre>
+<pre class="bf">[-]&lt;&lt;[&gt;&gt;+&lt;&lt;-]+&gt;[&gt;&gt;[-]&gt;[-]&lt;&lt;&lt;&lt;[&gt;&gt;&gt;&gt;+&lt;&lt;&lt;&lt;-]&gt;&gt;&gt;&gt;[&lt;&lt;[&lt;&lt;+&gt;&gt;&gt;+&lt;-]&gt;[&lt;+&gt;-]&gt;-]&lt;&lt;&lt;-]</pre>
+
+<h3 id="unitstens">1.7 Divide into tens and units</h3>
+
+<p class="operation"><code>number → tens + units</code></p>
+
+<p>
+This algorithm divides a number into decimal tens and units.
+The input number is stored in cell 0.
+</p>
+
+<div class="note">
+    <strong>Output:</strong>
+    cell 3 = tens,
+    cell 4 = units.
+</div>
+
+<p>
+File:
+<a href="https://github.com/programming12321/BF-examples/blob/main/div_into_unitstens.bf">
+<span class="file">div_into_unitstens.bf</span>
+</a>
+</p>
+
+<pre class="bf">++++++++++++++++++++++&gt;++++++++++&lt;[->-[&gt;+&gt;&gt;]&gt;[+[-&lt;+&gt;]&gt;+&gt;&gt;]&lt;&lt;&lt;&lt;&lt;]&gt;&gt;[ -&gt;&gt;&gt;+&gt;+&lt;&lt;&lt;&lt;]&gt;&gt;&gt;[ -&gt;&gt;&gt;-&lt;&lt;&lt;]&gt;[-&lt;&lt;+&gt;&gt;]</pre>
+
+<p>Example:</p>
+
+<table>
+<tr>
+    <th>Input</th>
+    <th>Cell 3 — Tens</th>
+    <th>Cell 4 — Units</th>
+</tr>
+<tr>
+    <td>22</td>
+    <td>2</td>
+    <td>2</td>
+</tr>
+<tr>
+    <td>57</td>
+    <td>5</td>
+    <td>7</td>
+</tr>
+<tr>
+    <td>99</td>
+    <td>9</td>
+    <td>9</td>
+</tr>
+</table>
 
 <!-- ============================= -->
+
 <!-- COMPARISON -->
+
 <!-- ============================= -->
 
 <h2 id="comparison">2. Comparisons</h2>
@@ -184,7 +241,9 @@ File:
 <pre class="bf">[&gt;-&lt;-]&gt;[&lt;+&gt;-]&gt;[-&lt;+&gt;]</pre>
 
 <!-- ============================= -->
+
 <!-- LOGIC GATES -->
+
 <!-- ============================= -->
 
 <h2 id="logic">3. Logic gates</h2>
@@ -230,7 +289,9 @@ File:
 </table>
 
 <!-- ============================= -->
+
 <!-- MEMORY -->
+
 <!-- ============================= -->
 
 <h2 id="memory">4. Memory manipulation</h2>
@@ -262,7 +323,9 @@ File:
 <pre class="bf">[&gt;+&lt;-]&gt;[&lt;+&gt;-]</pre>
 
 <!-- ============================= -->
+
 <!-- CONVERSIONS -->
+
 <!-- ============================= -->
 
 <h2 id="conversions">5. Conversions</h2>
@@ -294,7 +357,9 @@ File:
 <pre class="bf">++++++++++++++++++++++++++++++++++++++++++++++++</pre>
 
 <!-- ============================= -->
+
 <!-- OTHER -->
+
 <!-- ============================= -->
 
 <h2 id="other">6. Other algorithms</h2>
@@ -323,7 +388,7 @@ File:
 </a>
 </p>
 
-<pre class="bf">[->-<]</pre>
+<pre class="bf">[-&gt;-&lt;]</pre>
 
 <h3 id="pos">6.3 Positive</h3>
 
@@ -378,7 +443,9 @@ File:
 <pre class="bf">++++[&gt;++++++++++&lt;-]++++++++++&gt;+++++++&lt;[&gt;+.&lt;-]</pre>
 
 <!-- ============================= -->
+
 <!-- STRINGS -->
+
 <!-- ============================= -->
 
 <h2 id="strings">7. String manipulation</h2>
@@ -420,7 +487,7 @@ File:
 </a>
 </p>
 
-<pre class="bf">,----------[&gt;&gt;[-]&lt;&lt;[->+&gt;+&lt;&lt;]&gt;[[-]&gt;++++++++++.&lt;]&lt;+,----------],----------[&gt;&gt;[-]&lt;&lt;[->+&gt;+&lt;&lt;]&gt;[[-]&gt;++++++++++.&lt;]&lt;+,----------]</pre>
+<pre class="bf">,----------[&gt;&gt;[-]&lt;&lt;[-&gt;+&gt;+&lt;&lt;]&gt;[[-]&gt;++++++++++.&lt;]&lt;+,----------],----------[&gt;&gt;[-]&lt;&lt;[-&gt;+&gt;+&lt;&lt;]&gt;[[-]&gt;++++++++++.&lt;]&lt;+,----------]</pre>
 
 <h3 id="strcpy">7.4 Copy</h3>
 
@@ -433,10 +500,12 @@ File:
 </a>
 </p>
 
-<pre class="bf">,[->+&gt;+&lt;&lt;]&gt;&gt;[-&lt;&lt;+&gt;&gt;]&lt;&lt;</pre>
+<pre class="bf">,[-&gt;+&gt;+&lt;&lt;]&gt;&gt;[-&lt;&lt;+&gt;&gt;]&lt;&lt;</pre>
 
 <!-- ============================= -->
+
 <!-- REPOSITORY FILES -->
+
 <!-- ============================= -->
 
 <h2>Repository files</h2>
@@ -476,6 +545,11 @@ File:
 <tr>
     <td>Exponentiation</td>
     <td><a href="https://github.com/programming12321/BF-examples/blob/main/power.bf">power.bf</a></td>
+</tr>
+
+<tr>
+    <td>Divide into tens and units</td>
+    <td><a href="https://github.com/programming12321/BF-examples/blob/main/div_into_unitstens.bf">div_into_unitstens.bf</a></td>
 </tr>
 
 <tr>
@@ -570,6 +644,5 @@ File:
     Based on the examples in programming12321/BF-examples.
 </div>
 
-</div>
 </body>
 </html>
