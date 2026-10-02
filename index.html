@@ -25,157 +25,96 @@ programming12321/BF-examples
 <div class="toc">
 <div class="toc-title">Contents</div>
 
-<a href="#arithmetic">1. Arithmetic</a> <a href="#addition">1.1 Addition</a> <a href="#subtraction">1.2 Subtraction</a> <a href="#multiplication">1.3 Multiplication</a> <a href="#division">1.4 Division</a> <a href="#modulo">1.5 Modulo</a> <a href="#power">1.6 Exponentiation</a> <a href="#divunits">1.7 Divide into tens and units</a>
-
-<a href="#comparisons">2. Comparisons</a> <a href="#gt">2.1 Greater than</a> <a href="#gte">2.2 Greater than or equal</a>
-
-<a href="#logic">3. Logic gates</a> <a href="#not">3.1 NOT</a>
-
-<a href="#memory">4. Memory manipulation</a> <a href="#duplic">4.1 Duplicate</a> <a href="#swap">4.2 Swap</a>
-
-<a href="#conversions">5. Conversions</a> <a href="#asciinum">5.1 ASCII to Number</a> <a href="#numascii">5.2 Number to ASCII</a>
-
-<a href="#other">6. Other algorithms</a> <a href="#clr">6.1 Clear</a> <a href="#neg">6.2 Negation</a> <a href="#pos">6.3 Positive</a> <a href="#nl">6.4 Newline</a> <a href="#cpy">6.5 Copy</a> <a href="#print0to9">6.6 Print 0 to 9</a>
-
-<a href="#strings">7. String manipulation</a> <a href="#strrev">7.1 Reverse</a> <a href="#strlen">7.2 Length</a> <a href="#strcat">7.3 Concatenate</a> <a href="#strcpy">7.4 Copy</a> <a href="#strlow">7.5 Lowercase</a> <a href="#strupp">7.6 Uppercase</a>
-
+<a href="#algorithms">All Brainfuck algorithms</a>
 </div>
 
-<h2 id="arithmetic">1. Arithmetic</h2>
+<h2 id="algorithms">Brainfuck algorithms</h2>
 
-<h3 id="addition">1.1 Addition</h3>
-<p class="operation"><code>X = X + Y</code></p>
-<p> Adds <code>Y</code> to <code>X</code>.</p>
+<div id="bf-list">
+<p>Loading algorithms...</p>
+</div>
 
-<h3 id="subtraction">1.2 Subtraction</h3>
-<p class="operation"><code>X = X - Y</code></p>
-<p>Subtracts <code>Y</code> from <code>X</code>.</p>
+<script>
+const repository =
+    "https://api.github.com/repos/programming12321/BF-examples/contents/";
 
-<h3 id="multiplication">1.3 Multiplication</h3>
-<p class="operation"><code>X = X × Y</code></p>
-<p>Multiplies two values.</p>
+const github =
+    "https://github.com/programming12321/BF-examples/blob/main/";
 
-<h3 id="division">1.4 Division</h3>
-<p class="operation"><code>X = X / Y</code></p>
-<p>Divides one value by another.</p>
+const container = document.getElementById("bf-list");
 
-<h3 id="modulo">1.5 Modulo</h3>
-<p class="operation"><code>X = X % Y</code></p>
-<p>Calculates the remainder of a division.</p>
+fetch(repository)
+    .then(response => response.json())
+    .then(files => {
 
-<h3 id="power">1.6 Exponentiation</h3>
-<p class="operation"><code>X = X ^ Y</code></p>
-<p>Raises a number to a power.</p>
+        const bfFiles = files
+            .filter(file =>
+                file.type === "file" &&
+                file.name.endsWith(".bf")
+            )
+            .sort((a, b) =>
+                a.name.localeCompare(b.name)
+            );
 
-<h3 id="divunits">1.7 Divide into tens and units</h3>
-<p class="operation"><code>X → tens, units</code></p>
-<p>Divides a number into its tens and units digits.</p>
+        container.innerHTML = "";
 
-<h2 id="comparisons">2. Comparisons</h2>
+        if (bfFiles.length === 0) {
+            container.innerHTML =
+                "<p>No Brainfuck files found.</p>";
+            return;
+        }
 
-<h3 id="gt">2.1 Greater than</h3>
-<p class="operation"><code>X &gt; Y</code></p>
+        bfFiles.forEach((file, index) => {
 
-<h3 id="gte">2.2 Greater than or equal</h3>
-<p class="operation"><code>X &gt;= Y</code></p>
+            const section = document.createElement("section");
 
-<h2 id="logic">3. Logic gates</h2>
+            const title = document.createElement("h3");
+            title.textContent =
+                (index + 1) + ". " + file.name;
 
-<h3 id="not">3.1 NOT</h3>
-<p class="operation"><code>NOT X</code></p>
+            const link = document.createElement("p");
 
-<h2 id="memory">4. Memory manipulation</h2>
+            link.innerHTML =
+                'File: <a href="' +
+                github +
+                file.name +
+                '">' +
+                '<span class="file">' +
+                file.name +
+                '</span></a>';
 
-<h3 id="duplic">4.1 Duplicate</h3>
-<p class="operation"><code>X → X Y</code></p>
+            const code = document.createElement("pre");
+            code.className = "bf";
+            code.textContent = "Loading...";
 
-<h3 id="swap">4.2 Swap</h3>
-<p class="operation"><code>X Y → Y X</code></p>
+            section.appendChild(title);
+            section.appendChild(link);
+            section.appendChild(code);
 
-<h2 id="conversions">5. Conversions</h2>
+            container.appendChild(section);
 
-<h3 id="asciinum">5.1 ASCII to Number</h3>
-<p class="operation"><code>'5' → 5</code></p>
-
-<h3 id="numascii">5.2 Number to ASCII</h3>
-<p class="operation"><code>5 → '5'</code></p>
-
-<h2 id="other">6. Other algorithms</h2>
-
-<h3 id="clr">6.1 Clear</h3>
-<p class="operation"><code>X → 0</code></p>
-
-<h3 id="neg">6.2 Negation</h3>
-<p class="operation"><code>X → -X</code></p>
-
-<h3 id="pos">6.3 Positive</h3>
-<p class="operation"><code>X → |X|</code></p>
-
-<h3 id="nl">6.4 Newline</h3>
-<p class="operation"><code>print newline</code></p>
-
-<h3 id="cpy">6.5 Copy</h3>
-<p class="operation"><code>X → Y</code></p>
-
-<h3 id="print0to9">6.6 Print 0 to 9</h3>
-<p class="operation"><code>0123456789</code></p>
-
-<h2 id="strings">7. String manipulation</h2>
-
-<h3 id="strrev">7.1 Reverse</h3>
-<p class="operation"><code>str = reverse(str)</code></p>
-
-<h3 id="strlen">7.2 Length</h3>
-<p class="operation"><code>length(str)</code></p>
-
-<h3 id="strcat">7.3 Concatenate</h3>
-<p class="operation"><code>str1 + str2</code></p>
-
-<h3 id="strcpy">7.4 Copy</h3>
-<p class="operation"><code>str1 = str2</code></p>
-
-<h3 id="strlow">7.5 Lowercase</h3>
-
-<p class="operation"><code>str = lowercase(str)</code></p>
-
-<p>
-Adds <code>32</code> to every byte of the input string.
-This is a raw ASCII transformation and does not check whether a character
-is actually an uppercase letter.
-</p>
-
-<p>
-File:
-<a href="https://github.com/programming12321/BF-examples/blob/main/strlow.bf">
-<span class="file">strlow.bf</span>
-</a>
-</p>
-
-<pre class="bf">,[>,]&lt;[++++++++++++++++++++++++++++++++&lt;]&gt;[.&gt;]</pre>
-
-<h3 id="strupp">7.6 Uppercase</h3>
-
-<p class="operation"><code>str = uppercase(str)</code></p>
-
-<p>
-Subtracts <code>32</code> from every byte of the input string.
-This is a raw ASCII transformation and does not check whether a character
-is actually a lowercase letter.
-</p>
-
-<p>
-File:
-<a href="https://github.com/programming12321/BF-examples/blob/main/strupp.bf">
-<span class="file">strupp.bf</span>
-</a>
-</p>
-
-<pre class="bf">,[>,]&lt;[--------------------------------&lt;]&gt;[.&gt;]</pre>
+            fetch(file.download_url)
+                .then(response => response.text())
+                .then(source => {
+                    code.textContent = source;
+                })
+                .catch(() => {
+                    code.textContent =
+                        "Unable to load " + file.name;
+                });
+        });
+    })
+    .catch(error => {
+        container.innerHTML =
+            "<p>Unable to load Brainfuck algorithms.</p>";
+        console.error(error);
+    });
+</script>
 
 <div class="note">
 <strong>Note:</strong>
-The algorithms in this collection are intended as compact Brainfuck
-examples and may assume particular input formats or cell behavior.
+The algorithms in this collection are compact Brainfuck examples
+and may assume particular input formats or cell behavior.
 </div>
 
 <div class="footer">
