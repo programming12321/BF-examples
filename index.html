@@ -25,100 +25,289 @@ programming12321/BF-examples
 <div class="toc">
 <div class="toc-title">Contents</div>
 
-<a href="#algorithms">All Brainfuck algorithms</a>
+<a href="#algorithms">All algorithms</a>
 </div>
 
-<h2 id="algorithms">Brainfuck algorithms</h2>
+<h2 id="algorithms">All Brainfuck algorithms</h2>
 
-<div id="bf-list">
-<p>Loading algorithms...</p>
-</div>
 
-<script>
-const repository =
-    "https://api.github.com/repos/programming12321/BF-examples/contents/";
+<section class="algorithm">
+<h3>1. a.bf</h3>
 
-const github =
-    "https://github.com/programming12321/BF-examples/blob/main/";
+<p>
+<a href="https://github.com/programming12321/BF-examples/blob/main/a.bf">
+a.bf
+</a>
+</p>
 
-const container = document.getElementById("bf-list");
+<pre class="bf">&gt;++++++++++++++&gt;+++&gt;[-]&lt;[&gt;[-&gt;+&gt;+&lt;&lt;]&gt;[-&lt;&lt;-[&gt;]&gt;&gt;&gt;[&lt;[-&lt;-&gt;]&lt;[&gt;]&gt;&gt;[[-]&gt;&gt;+&lt;]&gt;-&lt;]&lt;&lt;]&gt;&gt;&gt;+&lt;&lt;[-&lt;&lt;+&gt;&gt;]&lt;&lt;&lt;]
+&gt;&gt;&gt;&gt;&gt;[-&lt;&lt;&lt;&lt;&lt;+&gt;&gt;&gt;&gt;&gt;]&lt;&lt;&lt;&lt;&lt;
+&gt;+++++++++++++++++++++++++++++++++++++++++++++++++.&gt;++++++++++.</pre>
+</section>
 
-fetch(repository)
-    .then(response => response.json())
-    .then(files => {
+<section class="algorithm">
+<h3>2. as.bf</h3>
 
-        const bfFiles = files
-            .filter(file =>
-                file.type === "file" &&
-                file.name.endsWith(".bf")
-            )
-            .sort((a, b) =>
-                a.name.localeCompare(b.name)
-            );
+<p>
+<a href="https://github.com/programming12321/BF-examples/blob/main/as.bf">
+as.bf
+</a>
+</p>
 
-        container.innerHTML = "";
+<pre class="bf">++
+&gt;+++
+&gt;[
+    &lt;
 
-        if (bfFiles.length === 0) {
-            container.innerHTML =
-                "<p>No Brainfuck files found.</p>";
-            return;
-        }
+    &gt;&gt;&gt;[-]&gt;[-]&gt;[-]&lt;&lt;&lt;&lt;
 
-        bfFiles.forEach((file, index) => {
+    &lt;&lt;[-&gt;&gt;&gt;+&gt;+&lt;&lt;&lt;&lt;]
+    &gt;&gt;&gt;&gt;[-&lt;&lt;&lt;&lt;+&gt;&gt;&gt;&gt;]
 
-            const section = document.createElement("section");
+    &gt;&gt;[
+        &lt;&lt;[
+            &gt;&gt;&gt;+&gt;+&lt;&lt;&lt;&lt;-
+        ]
+        &gt;&gt;&gt;&gt;[
+            &lt;&lt;&lt;&lt;+&gt;&gt;&gt;&gt;-
+        ]
+        &lt;-
+    ]
 
-            const title = document.createElement("h3");
-            title.textContent =
-                (index + 1) + ". " + file.name;
+    &lt;&lt;&lt;-
+]&lt;++++++++++++++++++++++++++++++++++++++++++++++++.&gt;++++++++++.</pre>
+</section>
 
-            const link = document.createElement("p");
+<section class="algorithm">
+<h3>3. bf.bf</h3>
 
-            link.innerHTML =
-                'File: <a href="' +
-                github +
-                file.name +
-                '">' +
-                '<span class="file">' +
-                file.name +
-                '</span></a>';
+<p>
+<a href="https://github.com/programming12321/BF-examples/blob/main/bf.bf">
+bf.bf
+</a>
+</p>
 
-            const code = document.createElement("pre");
-            code.className = "bf";
-            code.textContent = "Loading...";
+<pre class="bf">,[&gt;,]&lt;[&lt;]&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;[&gt;]&lt;[-]&lt;[-]&lt;[&lt;]&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;[.&gt;]</pre>
+</section>
 
-            section.appendChild(title);
-            section.appendChild(link);
-            section.appendChild(code);
+<section class="algorithm">
+<h3>4. bfi.bf</h3>
 
-            container.appendChild(section);
+<p>
+<a href="https://github.com/programming12321/BF-examples/blob/main/bfi.bf">
+bfi.bf
+</a>
+</p>
 
-            fetch(file.download_url)
-                .then(response => response.text())
-                .then(source => {
-                    code.textContent = source;
-                })
-                .catch(() => {
-                    code.textContent =
-                        "Unable to load " + file.name;
-                });
-        });
-    })
-    .catch(error => {
-        container.innerHTML =
-            "<p>Unable to load Brainfuck algorithms.</p>";
-        console.error(error);
-    });
-</script>
+<pre class="bf">+++&gt;+++++&lt;[-&gt;+&lt;]&gt;.</pre>
+</section>
+
+<section class="algorithm">
+<h3>5. d.bf</h3>
+
+<p>
+<a href="https://github.com/programming12321/BF-examples/blob/main/d.bf">
+d.bf
+</a>
+</p>
+
+<pre class="bf">++&gt;++&gt;[-]&gt;[-]&lt;&lt;
+[
+    -
+    &gt;[-&gt;&gt;+&gt;+&lt;&lt;&lt;]
+    &gt;&gt;[&lt;&lt;+&gt;&gt;-]
+    &lt;&lt;
+]
+&gt;&gt;++++++++++++++++++++++++++++++++++++++++++++++++++++.</pre>
+</section>
+
+<section class="algorithm">
+<h3>6. divide.bf</h3>
+
+<p>
+<a href="https://github.com/programming12321/BF-examples/blob/main/divide.bf">
+divide.bf
+</a>
+</p>
+
+<pre class="bf">&gt;[-]&gt;[-]&gt;[-]&gt;[-]&lt;&lt;&lt;&lt;    y 3
+++++++++++++++                 C0 = 14 (Dividendo)
+&gt;+++++                         C1 = 5  (Divisor)
+&lt;                              Vuelve a C0
+
+[-&gt;+&gt;-[&gt;+&gt;&gt;]&gt;[+[-&lt;+&gt;]&gt;+&gt;&gt;]&lt;&lt;&lt;&lt;&lt;]</pre>
+</section>
+
+<section class="algorithm">
+<h3>7. e.bf</h3>
+
+<p>
+<a href="https://github.com/programming12321/BF-examples/blob/main/e.bf">
+e.bf
+</a>
+</p>
+
+<pre class="bf">&gt;+++++++++[&lt;++++++++&gt;-]&lt;.&gt;+++++++[&lt;++++&gt;-]&lt;+.+++++++..+++.&gt;&gt;&gt;++++++++[&lt;++++&gt;-]&lt;.&gt;&gt;&gt;++++++++++[&lt;++++&gt;-]&lt;+.+++++++.+++.---.--------.&gt;&gt;&gt;++++++++[&lt;++++&gt;-]&lt;+.
+</pre>
+</section>
+
+<section class="algorithm">
+<h3>8. f.bf</h3>
+
+<p>
+<a href="https://github.com/programming12321/BF-examples/blob/main/f.bf">
+f.bf
+</a>
+</p>
+
+<pre class="bf">,[&gt;,]&lt;[&lt;]&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;[&gt;]&lt;[-]&lt;[-]&lt;[&lt;]&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;[.&gt;]</pre>
+</section>
+
+<section class="algorithm">
+<h3>9. h.bf</h3>
+
+<p>
+<a href="https://github.com/programming12321/BF-examples/blob/main/h.bf">
+h.bf
+</a>
+</p>
+
+<pre class="bf">operations (only 1 digit numbers)
+
+ADDITION
+&gt;++&gt;+++&gt;[-]&lt;&lt;[-&gt;+&lt;]&gt;++++++++++++++++++++++++++++++++++++++++++++++++.&gt;++++++++++.
+SUBTRACTION
+&gt;++&gt;+++&gt;[-]&lt;&lt;[-&gt;-&lt;]&gt;++++++++++++++++++++++++++++++++++++++++++++++++.&gt;++++++++++.
+MULTIPLICATION
+&gt;++&gt;++++&gt;[-]&lt;[-&gt;+++&lt;-]&gt;++++++++++++++++++++++++++++++++++++++++++++++++.&gt;++++++++++.
+DIVISION
+++++++&gt;++&lt;&gt;-&lt;-&gt;-&lt;&gt;&gt;+++++++++++++++++++++++++++++++++++++++++++++++++++.&gt;++++++++++ .
+SQUARE (this has 2 digits)
++++++++++&gt;+++++++++&lt;&gt;&gt;++++++++&gt;+&lt;++++++++++++++++++++++++++++++++++++++++++++++++.&gt;++++++++++++++++++++++++++++++++++++++++++++++++.&gt;++++++++++.
+SQUARE ROOT
++++++++++&gt;+++++++++&lt;&gt;&gt;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++.&gt;++++++++++.
+ABSOLUTE VALUE
++++++&gt;[-]&lt;&gt;&gt;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++.&gt;++++++++++.
+ROUND
++++&gt;++++++&lt;&gt;&gt;++++++++++++++++++++++++++++++++++++++++++++++++++++++++.&gt;++++++++++.
+EQUALS
++++++&gt;+++&lt;&gt;&gt;++++++++++++++++++++++++++++++++++++++++++++++++.&gt;++++++++++.
+NOT EQUALS
++++++&gt;+++&lt;&gt;&gt;+++++++++++++++++++++++++++++++++++++++++++++++++.&gt;++++++++++.
+GREATER
++++++&gt;+++&lt;&gt;&gt;+++++++++++++++++++++++++++++++++++++++++++++++++.&gt;++++++++++.
+GREATER EQUAL
++++++&gt;+++++&lt;&gt;&gt;+++++++++++++++++++++++++++++++++++++++++++++++++.&gt;++++++++++.
+LESS
++++&gt;++++++&lt;&gt;&gt;+++++++++++++++++++++++++++++++++++++++++++++++++.&gt;++++++++++.
+LESS EQUAL
+++++&gt;++++&lt;&gt;&gt;+++++++++++++++++++++++++++++++++++++++++++++++++.&gt;++++++++++.</pre>
+</section>
+
+<section class="algorithm">
+<h3>10. hello.bf</h3>
+
+<p>
+<a href="https://github.com/programming12321/BF-examples/blob/main/hello.bf">
+hello.bf
+</a>
+</p>
+
+<pre class="bf">+++&gt;++&gt;&gt;[-]&gt;[-]&lt;&lt;[-&gt;&gt;+&lt;&lt;]&lt;[&lt;[+&gt;&gt;+&lt;-]&gt;[&lt;+&gt;-]&gt;-]&gt;++++++++++++++++++++++++++++++++++++++++++++++++&gt;.</pre>
+</section>
+
+<section class="algorithm">
+<h3>11. help.bf</h3>
+
+<p>
+<a href="https://github.com/programming12321/BF-examples/blob/main/help.bf">
+help.bf
+</a>
+</p>
+
+<pre class="bf"></pre>
+</section>
+
+<section class="algorithm">
+<h3>12. hi.bf</h3>
+
+<p>
+<a href="https://github.com/programming12321/BF-examples/blob/main/hi.bf">
+hi.bf
+</a>
+</p>
+
+<pre class="bf">&gt;+++[&gt;+&gt;+&lt;&lt;-] &gt;&gt;[&lt;&lt;+&gt;&gt;-]&lt;.</pre>
+</section>
+
+<section class="algorithm">
+<h3>13. hola.bf</h3>
+
+<p>
+<a href="https://github.com/programming12321/BF-examples/blob/main/hola.bf">
+hola.bf
+</a>
+</p>
+
+<pre class="bf">+++&gt;++&lt;[-&gt;+&lt;]&gt;.
+
+&lt;-&gt;+&lt;.</pre>
+</section>
+
+<section class="algorithm">
+<h3>14. operators.bf</h3>
+
+<p>
+<a href="https://github.com/programming12321/BF-examples/blob/main/operators.bf">
+operators.bf
+</a>
+</p>
+
+<pre class="bf">ADDITION
+++&gt;+&lt;[-&gt;+&lt;]&gt;.&gt;++++++++++.
+SUBTRACTION
+++&gt;+&lt;[-&gt;-&lt;]&gt;.&gt;++++++++++.</pre>
+</section>
+
+<section class="algorithm">
+<h3>15. p.bf</h3>
+
+<p>
+<a href="https://github.com/programming12321/BF-examples/blob/main/p.bf">
+p.bf
+</a>
+</p>
+
+<pre class="bf">+++&gt;++[-&gt;+&gt;+&lt;&lt;]&gt;&gt;[-&lt;&lt;+&gt;&gt;]&lt;&lt;[-&gt;[-&gt;+&gt;+&lt;&lt;]&gt;&gt;[-&lt;&lt;+&gt;&gt;]&lt;&lt;-]&gt;&gt;.</pre>
+</section>
+
+<section class="algorithm">
+<h3>16. t.bf</h3>
+
+<p>
+<a href="https://github.com/programming12321/BF-examples/blob/main/t.bf">
+t.bf
+</a>
+</p>
+
+<pre class="bf">,[&gt;,]&lt;[&lt;]&gt;&gt;&gt;&gt;&gt;&gt;[&gt;]&lt;[-]&lt;[&lt;]&gt;&gt;&gt;&gt;&gt;&gt;[.&gt;]</pre>
+</section>
+
+<section class="algorithm">
+<h3>17. test.bf</h3>
+
+<p>
+<a href="https://github.com/programming12321/BF-examples/blob/main/test.bf">
+test.bf
+</a>
+</p>
+
+<pre class="bf">,&gt;,&lt;[-&gt;+&lt;]&gt;.</pre>
+</section>
+
 
 <div class="note">
-<strong>Note:</strong>
-The algorithms in this collection are compact Brainfuck examples
-and may assume particular input formats or cell behavior.
-</div>
-
-<div class="footer">
-Brainfuck algorithms · BF-examples
+<strong>Total algorithms:</strong> 17
 </div>
 
 </div>
